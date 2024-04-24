@@ -10,7 +10,7 @@ require('./models/user');
 require('./services/passport');
 
 mongoose.connect(keys.mongoURI);
-const db = new sqlite('sessions.db', { verbose: console.log });
+const db = new sqlite('sessions.db');
 
 const app = express();
 
