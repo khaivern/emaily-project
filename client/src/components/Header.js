@@ -43,7 +43,6 @@ export default function Header() {
                     </li>
                 </ul>
             </div>
-            <h1>{id}</h1>
         </nav>
     );
 }
