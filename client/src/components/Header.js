@@ -2,10 +2,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logoutUser } from '../reducers/authReducer';
+import Payments from './Payments';
 
 export default function Header() {
     const dispatch = useDispatch();
-    const { id } = useSelector((state) => state.auth);
+    const { id, credits } = useSelector((state) => state.auth);
 
     function logout(e) {
         e.preventDefault();
@@ -24,9 +25,15 @@ export default function Header() {
                 );
             default:
                 return (
-                    <li>
-                        <a onClick={logout}>Logout</a>
-                    </li>
+                    <>
+                        <li>
+                            <Payments />
+                        </li>
+                        <li style={{ margin: '0 1rem' }}>Credits: {credits}</li>
+                        <li>
+                            <a onClick={logout}>Logout</a>
+                        </li>
+                    </>
                 );
         }
     }
@@ -38,9 +45,7 @@ export default function Header() {
                     Emaily
                 </Link>
                 <ul id="nav-mobile" className="right hide-on-med-and-down">
-                    <li>
-                        <a href="/auth/google">{renderContent()}</a>
-                    </li>
+                    {renderContent()}
                 </ul>
             </div>
         </nav>

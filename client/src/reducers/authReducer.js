@@ -4,6 +4,7 @@ import axios from 'axios';
 const initialState = {
     googleId: null,
     id: null,
+    credits: 0,
 };
 
 const authSlice = createSlice({
@@ -13,10 +14,12 @@ const authSlice = createSlice({
         setUser: (state, action) => {
             state.googleId = action.payload.googleId || false;
             state.id = action.payload._id || false;
+            state.credits = action.payload.credits || 0;
         },
         clearUser: (state) => {
             state.googleId = false;
             state.id = false;
+            state.credits = 0;
         }
     },
 });
@@ -45,6 +48,18 @@ export const logoutUser = () => {
             } catch (err) {}
         }
         await sendRequest()
+    };
+};
+
+export const addCredits = (token) => {
+    return async (dispatch) => {
+        const sendRequest = async () => {
+            try {
+                const res = await axios.post('/api/stripe', { token });
+                dispatch(setUser(res.data));
+            } catch (err) {}
+        }
+        await sendRequest();
     };
 };
 
