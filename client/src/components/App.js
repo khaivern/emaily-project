@@ -1,13 +1,12 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { fetchUser } from '../reducers/authReducer';
-import Header from './Header';
-import Landing from './Landing';
 import Root from '../layouts/root';
+import { fetchUser } from '../reducers/authReducer';
+import Dashboard from './Dashboard';
+import Landing from './Landing';
+import SurveyNew from './Surveys/SurveyNew';
 
-const Dashboard = () => <h2>Dashboard</h2>;
-const SurveyNew = () => <h2>SurveyNew</h2>;
 
 const router = createBrowserRouter([
     {

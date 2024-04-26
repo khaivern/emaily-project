@@ -5,9 +5,9 @@ const sqlite = require('better-sqlite3');
 const passport = require('passport');
 
 const keys = require('./config/keys');
-const requireLogin = require('./middlewares/requireLogin');
 const SqliteStore = require('better-sqlite3-session-store')(expressSession);
-require('./models/user');
+require('./models/User');
+require('./models/Survey');
 require('./services/passport');
 
 mongoose.connect(keys.mongoURI);
@@ -38,6 +38,7 @@ app.use(passport.session());
 
 require('./routes/auth.routes')(app);
 require('./routes/billing.routes')(app);
+require('./routes/survey.routes')(app);
 
 if (process.env.NODE_ENV === 'production') {
     const path = require('path');
