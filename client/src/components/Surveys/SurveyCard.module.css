@@ -1,0 +1,23 @@
+.title {
+    color: goldenrod;
+}
+
+.date {
+    margin-left: 0.5rem;
+}
+
+.canvas {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    height: 300px;
+}
+
+.no-feedback {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 1.5rem;
+}

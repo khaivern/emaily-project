@@ -1,7 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import EmailyLogo from '../assets/logo.png';
 import { logoutUser } from '../reducers/authReducer';
+import classes from './Header.module.css';
 import Payments from './Payments';
 
 export default function Header() {
@@ -16,7 +19,7 @@ export default function Header() {
     function renderContent() {
         switch (id) {
             case null:
-                return 'Still deciding';
+                return 'Fetching Status...';
             case false:
                 return (
                     <li>
@@ -27,9 +30,8 @@ export default function Header() {
                 return (
                     <>
                         <li>
-                            <Payments />
+                            <Payments credits={credits} />
                         </li>
-                        <li style={{ margin: '0 1rem' }}>Credits: {credits}</li>
                         <li>
                             <a onClick={logout}>Logout</a>
                         </li>
@@ -39,10 +41,10 @@ export default function Header() {
     }
 
     return (
-        <nav>
+        <nav className="blue darken-4">
             <div className="container nav-wrapper">
-                <Link to={id ? '/surveys' : '/'} className="brand-logo">
-                    Emaily
+                <Link to={id ? '/surveys' : '/'} className={`brand-logo ${classes.logo}`}>
+                    <img src={EmailyLogo} alt="Emaily Logo" />
                 </Link>
                 <ul id="nav-mobile" className="right hide-on-med-and-down">
                     {renderContent()}

@@ -1,35 +1,34 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import NoSurveys from '../../assets/no-surveys.jpg';
 import { fetchSurveys } from '../../reducers/surveyReducer';
+import SurveyCard from './SurveyCard';
+import classes from './SurveyList.module.css';
 
 export default function SurveyList() {
     const { surveys } = useSelector((state) => state.surveys);
-    console.log(surveys);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(fetchSurveys());
     }, [dispatch]);
 
-    function renderSurveys() {
-        return surveys.map((survey) => (
-            <div key={survey.id} class="card indigo darken-4">
-                <div class="card-content white-text">
-                    <span class="card-title">{survey.title}</span>
-                    <p>{survey.body}</p>
-                    <p className="right">Sent On: {new Date(survey.dateSent).toLocaleDateString()}</p>
+    if (surveys.length === 0) {
+        return (
+            <div className={classes['no-surveys']}>
+                <div className={classes['img-container']}>
+                    <img src={NoSurveys} alt="No surveys created yet" />
                 </div>
-                <div className="card-action">
-                    <p className="amber-text" style={{ display: 'inline-block', marginRight: '1rem' }}>
-                        Yes: {survey.yes}
-                    </p>
-                    <p className="amber-text" style={{ display: 'inline-block' }}>
-                        No: {survey.no}
-                    </p>
-                </div>
+                <h4>No surveys created yet...</h4>
             </div>
-        ));
+        );
     }
 
-    return <div>{renderSurveys()}</div>;
+    return (
+        <div className={classes.surveys}>
+            {surveys.map((survey) => (
+                <SurveyCard key={survey.id} survey={survey} />
+            ))}
+        </div>
+    );
 }

@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import StripeCheckout from 'react-stripe-checkout';
 import { addCredits } from '../reducers/authReducer';
 
-export default function Payments() {
+export default function Payments({credits}) {
     const dispatch = useDispatch();
 
     function tokenHandler(token) {
@@ -12,13 +12,13 @@ export default function Payments() {
     return (
         <StripeCheckout
             name="Emaily"
-            description="$5 for 5 email credits"
+            description="Meow gimme credits..."
             image="https://upload.wikimedia.org/wikipedia/commons/7/77/Avatar_cat.png"
             amount={500}
-            panelLabel="Pay up $5"
+            panelLabel="5 credits for "
             token={tokenHandler}
             stripeKey={process.env.REACT_APP_STRIPE_KEY}>
-            <button className="btn" style={{ backgroundColor: '#ffa500' }}>Add Credits</button>
+            <button className="btn amber darken-3">Credits: {credits}</button>
         </StripeCheckout>
     );
 }

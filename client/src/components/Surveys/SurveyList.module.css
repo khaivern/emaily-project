@@ -1,0 +1,26 @@
+.no-surveys {
+    margin-top: 128px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-container {
+    border-radius: 9999px;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    max-width: 256px;
+    max-height: 256px;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.surveys {
+    margin-top: 32px;
+}
