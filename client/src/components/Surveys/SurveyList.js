@@ -27,7 +27,7 @@ export default function SurveyList() {
     return (
         <div className={classes.surveys}>
             {surveys.map((survey) => (
-                <SurveyCard key={survey.id} survey={survey} />
+                <SurveyCard key={survey._id} survey={survey} />
             ))}
         </div>
     );

@@ -12,10 +12,13 @@ const surveySlice = createSlice({
         setSurveys(state, action) {
             state.surveys = action.payload;
         },
+        removeSurvey(state, action) {
+            state.surveys = state.surveys.filter(survey => survey._id !== action.payload);
+        }
     },
 });
 
-export const { setSurveys } = surveySlice.actions;
+export const { setSurveys, removeSurvey } = surveySlice.actions;
 
 export const fetchSurveys = () => {
     return (dispatch) => {
@@ -26,5 +29,16 @@ export const fetchSurveys = () => {
         sendRequest();
     };
 };
+
+export const deleteSurvey = (surveyId) => {
+    return (dispatch) => {
+        const sendRequest = async () => {
+            const res = await axios.delete(`/api/surveys/${surveyId}`);
+            console.log(res.data);
+            dispatch(removeSurvey(res.data));
+        }
+        sendRequest();
+    }
+}
 
 export default surveySlice.reducer;

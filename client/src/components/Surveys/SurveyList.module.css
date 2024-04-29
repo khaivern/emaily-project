@@ -23,4 +23,7 @@
 
 .surveys {
     margin-top: 32px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
 }

@@ -1,8 +1,12 @@
 import Chart from 'chart.js/auto';
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { deleteSurvey } from '../../reducers/surveyReducer';
 import classes from './SurveyCard.module.css';
 
 export default function SurveyCard({ survey }) {
+    const dispatch = useDispatch();
+
     const formattedDate = new Date(survey.dateSent).toLocaleDateString('en-GB');
 
     const hasNoFeedback = !survey.yes && !survey.no;
@@ -18,9 +22,13 @@ export default function SurveyCard({ survey }) {
         });
     }, [survey._id, survey.yes, survey.no]);
 
+    const deleteSurveyHandler = () => {
+        dispatch(deleteSurvey(survey._id));
+    }
+
     return (
-        <div class="card blue-grey darken-3">
-            <div class="card-content white-text">
+        <div className={`card blue-grey darken-3 ${classes.card}`}>
+            <div className="card-content white-text">
                 <p className="right">
                     Created At:
                     <b className={classes.date}>{formattedDate}</b>
@@ -34,6 +42,12 @@ export default function SurveyCard({ survey }) {
                     <canvas id={survey._id}></canvas>
                     {hasNoFeedback && <p className={classes['no-feedback']}>No feedback received yet</p>}
                 </div>
+            </div>
+            <div className={classes['delete-row']}>
+                <button className="grey darken-1 btn-small" onClick={deleteSurveyHandler}>
+                    <i className="material-icons left">delete</i>
+                    Delete
+                </button>
             </div>
         </div>
     );
