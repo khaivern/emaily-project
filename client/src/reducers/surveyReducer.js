@@ -34,7 +34,6 @@ export const deleteSurvey = (surveyId) => {
     return (dispatch) => {
         const sendRequest = async () => {
             const res = await axios.delete(`/api/surveys/${surveyId}`);
-            console.log(res.data);
             dispatch(removeSurvey(res.data));
         }
         sendRequest();

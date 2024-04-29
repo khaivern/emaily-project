@@ -13,7 +13,6 @@ const Survey = mongoose.model('surveys');
 module.exports = (app) => {
     app.get('/api/surveys', requireLogin, async (req, res) => {
         const surveys = await Survey.find({ _user: req.user.id }).select({ recipients: false });
-        console.log(surveys);
         res.send(surveys);
     });
 
@@ -49,7 +48,6 @@ module.exports = (app) => {
     app.delete('/api/surveys/:surveyId', requireLogin, async (req, res) => {
         const { surveyId } = req.params;
         const survey = await Survey.findByIdAndDelete(surveyId);
-        console.log(survey);
         res.send(survey.id);
     });
 

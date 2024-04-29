@@ -14,8 +14,6 @@ export default function SurveyForm({ onNext }) {
 
     const focusOnError = createDecorator();
 
-    console.log(form);
-
     function cancelHandler() {
         navigate('/surveys');
     }
@@ -46,7 +44,6 @@ export default function SurveyForm({ onNext }) {
 
         const emailIsInvalid = validateEmail(values.recipients || '');
         if (emailIsInvalid) {
-            console.log(emailIsInvalid);
             errors.recipients = emailIsInvalid;
         }
 
